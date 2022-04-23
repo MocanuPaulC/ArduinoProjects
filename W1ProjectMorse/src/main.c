@@ -11,12 +11,13 @@ int main()
 {
 
   // I haven't been able to figure out how to use the serial monitor
+  // only works with letters, numbers and spaces
   enableAllLeds();
   lightDownAllLeds();
   initialiseLetters();
   startSequence();
 
-  char message[] = "abcdefg";
+  char message[] = "Hello World";
   
   int stringToInt[strlen(message)];
   for(int i = 0 ; i <strlen(message);i++){
