@@ -17,7 +17,7 @@ int main()
   initialiseLetters();
   startSequence();
 
-  char message[] = "Hello World";
+  char message[] = "sugi pula";
   
   int stringToInt[strlen(message)];
   for(int i = 0 ; i <strlen(message);i++){
@@ -145,7 +145,7 @@ int main()
   for(int i = 0 ; i <strlen(message);i++){
     if(stringToInt[i]==-1){
       _delay_ms(2800);
-      break;
+      continue;;
     }
     else{
     _delay_ms(1200);
@@ -168,7 +168,7 @@ int main()
         _delay_ms(400);
         break;
       default:
-        break;
+        continue;
       }
     }
   }
@@ -353,8 +353,7 @@ void initialiseLetters(){
   letters[30][0]=0;
   letters[30][1]=0;
   letters[30][2]=1;
-  letters[30][3]=1;
-  letters[30][4]=2;
+  letters[30][3]=2;
   //v
   letters[31][0]=0;
   letters[31][1]=0;
