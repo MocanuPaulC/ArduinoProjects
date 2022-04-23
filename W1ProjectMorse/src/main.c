@@ -17,7 +17,7 @@ int main()
   initialiseLetters();
   startSequence();
 
-  char message[] = "sugi pula";
+  char message[] = "Hello World";
   
   int stringToInt[strlen(message)];
   for(int i = 0 ; i <strlen(message);i++){
