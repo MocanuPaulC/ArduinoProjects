@@ -10,6 +10,12 @@ int main()
   enableAllLeds();
   lightDownAllLeds();
 
-  incrementLedBurn(0);
+  while (1)
+  {
+  
+  fadeInLed(1,500);
+  fadeOutLed(1,500);
+
+  }
   return 0;
 }
