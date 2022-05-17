@@ -7,6 +7,9 @@
 #include <ctype.h>
 int letters[36][5];
 
+
+
+
 int main()
 {
 
@@ -18,6 +21,7 @@ int main()
   startSequence();
 
   char message[] = "Hello World";
+  
   
   int stringToInt[strlen(message)];
   for(int i = 0 ; i <strlen(message);i++){
