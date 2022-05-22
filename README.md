@@ -7,3 +7,5 @@ Played around with the exercises trying to figure out how thigns work.
 Finished Weekly project usign everything requested on the page.
 Used interupts, the display, the buttons, malloc to allocate memory
 Also, I could not manage to win against the computer ;(
+Week4:
+Finished lunar lander; Used a primitive linkedList for the log book;
