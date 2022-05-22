@@ -43,7 +43,7 @@ void initBtns(){
   BUTTON_DDR &= ~_BV( BUTTON2 );
   BUTTON_PORT |= _BV( BUTTON2 );
   PCICR |= _BV( PCIE1 );
-  PCMSK1 |= _BV( BUTTON2 );   
+  // PCMSK1 |= _BV( BUTTON2 );   
   sei();
 
 
@@ -51,7 +51,7 @@ void initBtns(){
 
 int second=0;
 float currentSpeed=100;
-int distance=1000;
+int distance=9999;
 node_t *head;
 int fuelReserve=1500;
 uint8_t ledsToDisplay=0b00000000;
@@ -62,7 +62,7 @@ int sem2=0;
 ISR(TIMER1_OVF_vect){
   second+=1;
   burst=0;
-  while(bit_is_clear( BUTTON_PIN, BUTTON1)){
+  while(bit_is_clear( BUTTON_PIN, BUTTON2)){
     if(burst<50){
     burst+=5;
     }
@@ -154,7 +154,7 @@ int main(){
     sem2=1;
   }
   else{
-    printf("you suck!\n");
+    printf("you crashed!\n");
     playTone(C5,300);
     _delay_ms(100);
     playTone(D5,300);
