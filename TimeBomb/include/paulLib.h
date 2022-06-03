@@ -4,12 +4,24 @@
 #include <avr/io.h>
 #include <stdio.h>
 #include <time.h>
+#include <string.h>
+#include <math.h>
+// #include <stdio.h>
 // #include <Arduino.h>
 
 void enableOneLed(int led){
     DDRB |= (1<< (PB2 + led));
 }
 
+
+int writeLinesOnHeap(char sentence[]){
+    char *copy;
+    // int size=strlen(sentence)+1;
+    copy=malloc(strlen(sentence)+1);
+    strcpy(copy,sentence);
+    printf("\"%s\" is on heap\n", sentence);
+    return copy;
+}
 
 void enableMultipleLeds(uint8_t leds){
     uint8_t ledNumber = 0b00000001;
@@ -23,6 +35,8 @@ void enableMultipleLeds(uint8_t leds){
 };
 
 
+
+
 void enableAllLeds(){
     enableMultipleLeds(0b00001111);
 }
@@ -30,8 +44,6 @@ void enableAllLeds(){
 void lightUpOneLed(int led){
     PORTB &= ~( 1 << (PB2 + led));
 }
-
-//0b0000 1010
 
 void lightUpMultipleLeds(uint8_t leds){
     uint8_t ledNumber = 0b00000001;
@@ -65,6 +77,58 @@ void lightDownAllLeds(){
     lightDownMultipleLeds(0b00001111);
 }
 
+void reverse(char* str, int len)
+{
+    int i = 0, j = len - 1, temp;
+    while (i < j) {
+        temp = str[i];
+        str[i] = str[j];
+        str[j] = temp;
+        i++;
+        j--;
+    }
+}
+
+int intToStr(int x, char str[], int d)
+{
+    int i = 0;
+    while (x) {
+        str[i++] = (x % 10) + '0';
+        x = x / 10;
+    }
+  
+    // If number of digits required is more, then
+    // add 0s at the beginning
+    while (i < d)
+        str[i++] = '0';
+  
+    reverse(str, i);
+    str[i] = '\0';
+    return i;
+}
+
+void gcvt(float n, char* res, int afterpoint){
+    // Extract integer part
+    int ipart = (int)n;
+  
+    // Extract floating part
+    float fpart = n - (float)ipart;
+  
+    // convert integer part to string
+    int i = intToStr(ipart, res, 0);
+  
+    // check for display option after point
+    if (afterpoint != 0) {
+        res[i] = '.'; // add dot
+  
+        // Get the value of fraction part upto given no.
+        // of points after dot. The third parameter 
+        // is needed to handle cases like 233.007
+        fpart = fpart * pow(10, afterpoint);
+  
+        intToStr((int)fpart, res + i + 1, afterpoint);
+    }
+}
 
 void dimLed(int ledNumber, int percentage, int duration){
 
@@ -168,6 +232,15 @@ void flashLed(int led,int nrOfFlashes){
         lightUpOneLed(led);
         _delay_ms(50);
         lightDownOneLed(led);
+        _delay_ms(50);
+    }
+}
+
+void flashLedWithByte(uint8_t led,int nrOfFlashes){
+    for(int i = 0 ; i < nrOfFlashes; i++){
+        lightUpMultipleLeds(led);
+        _delay_ms(50);
+        lightDownMultipleLeds(led);
         _delay_ms(50);
     }
 }
